@@ -246,9 +246,6 @@ void PipelineNetwork::viewAllObjects() {
 }
 
 void PipelineNetwork::saveToFile_pipe(ofstream& file) {
-    // ofstream file(filename);
-    // if (file.is_open()) {
-        // Сохраняем трубы
         file << "PIPES " << pipes.size() << endl;
         for (const auto& [id, pipe] : pipes) {
             file << "PIPE " << id << " "
@@ -257,19 +254,9 @@ void PipelineNetwork::saveToFile_pipe(ofstream& file) {
                  << pipe.getDiameter() << " "
                  << pipe.isInRepair() << endl;
         }
-        // }        
-        // file.close();
-        // cout << "Данные сохранены в файл: " << filename << endl;
-        // logger.log("Сохранение данных в файл: " + filename);
-    // } else {
-    //     cout << "Ошибка открытия файла для записи\n";
-    // }
 }
 
 void PipelineNetwork::saveToFile_CS(ofstream& file) {
-    // ofstream file(filename);
-    // if (file.is_open()) {
-        // Сохраняем КС
         file << "STATIONS " << stations.size() << endl;
         for (const auto& [id, station] : stations) {
             file << "STATION " << id << " "
@@ -278,21 +265,10 @@ void PipelineNetwork::saveToFile_CS(ofstream& file) {
                  << station.getWorkingWorkshop() << " "
                  << station.getClassWorkshop() << endl;
         }
-        
-    //     file.close();
-    //     cout << "Данные сохранены в файл: " << filename << endl;
-    //     logger.log("Сохранение данных в файл: " + filename);
-    // } else {
-    //     cout << "Ошибка открытия файла для записи\n";
-    // }
+
 }
 
-void PipelineNetwork::loadFromFile(const string& filename) {
-    ifstream file(filename);
-    if (file.is_open()) {
-        pipes.clear();
-        stations.clear();
-        
+void PipelineNetwork::loadFromFile_pipe(ifstream& file) {        
         string type;
         int count;
         
@@ -321,6 +297,11 @@ void PipelineNetwork::loadFromFile(const string& filename) {
                 if (id >= nextPipeId) nextPipeId = id + 1;
             }
         }
+}
+
+void PipelineNetwork::loadFromFile_CS(ifstream& file) {
+        string type;
+        int count;
         
         // Загружаем КС
         file >> type >> count;
@@ -347,13 +328,6 @@ void PipelineNetwork::loadFromFile(const string& filename) {
                 if (id >= nextStationId) nextStationId = id + 1;
             }
         }
-        
-        file.close();
-        cout << "Данные загружены из файла: " << filename << endl;
-        logger.log("Загрузка данных из файла: " + filename);
-    } else {
-        cout << "Файл с данными не найден\n";
-    }
 }
 
 bool PipelineNetwork::pipeExists(int id) const { 

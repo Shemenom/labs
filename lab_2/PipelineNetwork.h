@@ -43,7 +43,9 @@ public:
     // Файлы
     void saveToFile_pipe(ofstream& file);
     void saveToFile_CS(ofstream& file);
-    void loadFromFile(const string& filename);
+
+    void loadFromFile_pipe(ifstream& file);
+    void loadFromFile_CS(ifstream& file);
     
     // Геттеры
     bool pipeExists(int id) const;

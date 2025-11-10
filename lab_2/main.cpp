@@ -164,8 +164,15 @@ int main() {
             }
 
             case 12: {
-                string filename = "data.txt";
-                network.loadFromFile(filename);
+                ifstream file("data.txt");
+                if (file.is_open()) {
+                    network.loadFromFile_pipe(file);
+                    network.loadFromFile_CS(file);
+                    file.close();
+                    cout << "Даннын сохранены";
+                } else {
+                    cout << "Ошибка открытия файла для записи";
+                }
                 break;
             }
                 
