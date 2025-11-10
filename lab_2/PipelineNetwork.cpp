@@ -245,11 +245,11 @@ void PipelineNetwork::viewAllObjects() {
     }
 }
 
-void PipelineNetwork::saveToFile(const string& filename) {
-    ofstream file(filename);
-    if (file.is_open()) {
+void PipelineNetwork::saveToFile_pipe(ofstream& file) {
+    // ofstream file(filename);
+    // if (file.is_open()) {
         // Сохраняем трубы
-        file << "PIPES " << pipes.size() << endl;
+        // file << "PIPES " << pipes.size() << endl;
         for (const auto& [id, pipe] : pipes) {
             file << "PIPE " << id << " "
                  << pipe.getName() << " "
@@ -257,7 +257,18 @@ void PipelineNetwork::saveToFile(const string& filename) {
                  << pipe.getDiameter() << " "
                  << pipe.isInRepair() << endl;
         }
-        
+        // }        
+        // file.close();
+        // cout << "Данные сохранены в файл: " << filename << endl;
+        // logger.log("Сохранение данных в файл: " + filename);
+    // } else {
+    //     cout << "Ошибка открытия файла для записи\n";
+    // }
+}
+
+void PipelineNetwork::saveToFile_CS() {
+    ofstream file(filename);
+    if (file.is_open()) {
         // Сохраняем КС
         file << "STATIONS " << stations.size() << endl;
         for (const auto& [id, station] : stations) {

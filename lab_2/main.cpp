@@ -151,17 +151,21 @@ int main() {
             }
                 
             case 11: {
-                cout << "Введите имя файла для сохранения: ";
-                string filename;
-                getline(cin, filename);
-                network.saveToFile(filename);
+                ofstream file("data.txt");
+                if (file.is_open()) {
+                    network.saveToFile_pipe();
+                    network.saveToFile_CS();
+                    file.close();
+                    cout << "Данные сохранены в файл";
+
+                } else {
+                    cout << "Ошибка открытия файла для записи";
+                }
                 break;
             }
-                
+
             case 12: {
-                cout << "Введите имя файла для загрузки: ";
-                string filename;
-                getline(cin, filename);
+                string filename = "data.txt";
                 network.loadFromFile(filename);
                 break;
             }

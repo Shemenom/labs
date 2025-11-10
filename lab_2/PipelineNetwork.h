@@ -41,7 +41,8 @@ public:
     void viewAllObjects();
     
     // Файлы
-    void saveToFile(const string& filename);
+    void saveToFile_pipe(ofstream& file);
+    void saveToFile_CS(ofstream& file);
     void loadFromFile(const string& filename);
     
     // Геттеры
