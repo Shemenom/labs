@@ -249,7 +249,7 @@ void PipelineNetwork::saveToFile_pipe(ofstream& file) {
     // ofstream file(filename);
     // if (file.is_open()) {
         // Сохраняем трубы
-        // file << "PIPES " << pipes.size() << endl;
+        file << "PIPES " << pipes.size() << endl;
         for (const auto& [id, pipe] : pipes) {
             file << "PIPE " << id << " "
                  << pipe.getName() << " "
@@ -266,9 +266,9 @@ void PipelineNetwork::saveToFile_pipe(ofstream& file) {
     // }
 }
 
-void PipelineNetwork::saveToFile_CS() {
-    ofstream file(filename);
-    if (file.is_open()) {
+void PipelineNetwork::saveToFile_CS(ofstream& file) {
+    // ofstream file(filename);
+    // if (file.is_open()) {
         // Сохраняем КС
         file << "STATIONS " << stations.size() << endl;
         for (const auto& [id, station] : stations) {
@@ -279,12 +279,12 @@ void PipelineNetwork::saveToFile_CS() {
                  << station.getClassWorkshop() << endl;
         }
         
-        file.close();
-        cout << "Данные сохранены в файл: " << filename << endl;
-        logger.log("Сохранение данных в файл: " + filename);
-    } else {
-        cout << "Ошибка открытия файла для записи\n";
-    }
+    //     file.close();
+    //     cout << "Данные сохранены в файл: " << filename << endl;
+    //     logger.log("Сохранение данных в файл: " + filename);
+    // } else {
+    //     cout << "Ошибка открытия файла для записи\n";
+    // }
 }
 
 void PipelineNetwork::loadFromFile(const string& filename) {

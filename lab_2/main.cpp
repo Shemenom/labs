@@ -153,11 +153,10 @@ int main() {
             case 11: {
                 ofstream file("data.txt");
                 if (file.is_open()) {
-                    network.saveToFile_pipe();
-                    network.saveToFile_CS();
+                    network.saveToFile_pipe(file);
+                    network.saveToFile_CS(file);
                     file.close();
                     cout << "Данные сохранены в файл";
-
                 } else {
                     cout << "Ошибка открытия файла для записи";
                 }
