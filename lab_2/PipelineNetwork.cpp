@@ -327,11 +327,3 @@ void PipelineNetwork::loadFromFile_CS(ifstream& file) {
             }
         }
 }
-
-bool PipelineNetwork::pipeExists(int id) const { 
-    return pipes.count(id) > 0; 
-}
-
-bool PipelineNetwork::stationExists(int id) const { 
-    return stations.count(id) > 0; 
-}
