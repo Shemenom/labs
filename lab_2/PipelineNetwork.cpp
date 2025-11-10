@@ -22,9 +22,9 @@ void PipelineNetwork::addPipe() {
 
 void PipelineNetwork::inputPipeData(Pipe& pipe) {
     cout << "Название трубы: ";
-    string name;
-    getline(cin >> ws, name);
-    pipe.setName(name);
+    // string name;
+    // getline(cin >> ws, name);
+    pipe.setName();
 
     cout << "Длина: ";
     double length;
@@ -336,12 +336,4 @@ bool PipelineNetwork::pipeExists(int id) const {
 
 bool PipelineNetwork::stationExists(int id) const { 
     return stations.count(id) > 0; 
-}
-
-const unordered_map<int, Pipe>& PipelineNetwork::getPipes() const { 
-    return pipes; 
-}
-
-const unordered_map<int, CompressorStation>& PipelineNetwork::getStations() const { 
-    return stations; 
 }

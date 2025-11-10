@@ -22,7 +22,7 @@ public:
     bool isInRepair() const { return inRepair; }
     
     // Сеттеры с проверками
-    void setName(const string& newName);
+    void setName();
     void setLength(double newLength);
     void setDiameter(int newDiameter);
     void setInRepair(bool repair) { inRepair = repair; }

@@ -6,18 +6,8 @@ using namespace std;
 
 Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
 
-void Pipe::setName(const string& newName) {
-    if (newName.empty()) {
-        cout << "Ошибка: название не может быть пустым. Введите снова: ";
-        string correctedName;
-        getline(cin, correctedName);
-        if (correctedName.empty()) {
-            throw invalid_argument("Название не может быть пустым");
-        }
-        name = correctedName;
-    } else {
-        name = newName;
-    }
+void Pipe::setName() {
+    getline(cin >> ws, name);
 }
 
 void Pipe::setLength(double newLength) {
