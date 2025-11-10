@@ -30,8 +30,12 @@ int main() {
     
     do {
         displayMenu();
-        cin >> choice;
-        cin.ignore(100, '\n');
+
+        while (!(cin >> choice) || (choice < 0 || choice > 12)) {
+            cout << "Ошибка! Введите число от 0 до 12: ";
+            cin.clear(); 
+            cin.ignore(10000, '\n'); 
+        }
         
         switch (choice) {
             case 1:
@@ -169,7 +173,7 @@ int main() {
                     network.loadFromFile_pipe(file);
                     network.loadFromFile_CS(file);
                     file.close();
-                    cout << "Даннын сохранены";
+                    cout << "Данные загружены"; // Исправь опечатку "Даннын"
                 } else {
                     cout << "Ошибка открытия файла для записи";
                 }
@@ -179,9 +183,6 @@ int main() {
             case 0:
                 cout << "Выход из программы\n";
                 break;
-                
-            default:
-                cout << "Неверный ввод, введите число от 0 до 12\n";
         }
         
     } while (choice != 0);

@@ -22,8 +22,6 @@ void PipelineNetwork::addPipe() {
 
 void PipelineNetwork::inputPipeData(Pipe& pipe) {
     cout << "Название трубы: ";
-    // string name;
-    // getline(cin >> ws, name);
     pipe.setName();
 
     cout << "Длина: ";
