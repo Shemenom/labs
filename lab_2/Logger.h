@@ -1,7 +1,7 @@
+#pragma once
 #include <fstream>
 #include <string>
-
-using namespace std;
+#include "Utils.h"
 
 class Logger {
 private:

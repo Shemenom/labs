@@ -1,13 +1,15 @@
 #include "Pipe.h"
 #include <iostream>
 #include <limits>
+#include "Utils.h"
 
-using namespace std;
-
-Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
+Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {
+    LOG_OBJECT_CREATION("Труба", id);
+}
 
 void Pipe::setName() {
-    getline(cin >> ws, name);
+    INPUT_LINE(cin, name);
+    LOG_ACTION("Труба ID " + to_string(id) + " название установлено: " + name);
 }
 
 void Pipe::setLength(double newLength) {
@@ -21,6 +23,7 @@ void Pipe::setLength(double newLength) {
         }
     }
     length = newLength;
+    LOG_ACTION("Труба ID " + to_string(id) + " длина установлена: " + to_string(length));
 }
 
 void Pipe::setDiameter(int newDiameter) {
@@ -34,6 +37,12 @@ void Pipe::setDiameter(int newDiameter) {
         }
     }
     diameter = newDiameter;
+    LOG_ACTION("Труба ID " + to_string(id) + " диаметр установлен: " + to_string(diameter));
+}
+
+void Pipe::setInRepair(bool repair) { 
+    inRepair = repair; 
+    LOG_ACTION("Труба ID " + to_string(id) + " статус ремонта: " + (repair ? "в ремонте" : "работает"));
 }
 
 void Pipe::loadData(const string& loadName, double loadLength, int loadDiameter, bool loadInRepair) {
@@ -41,4 +50,5 @@ void Pipe::loadData(const string& loadName, double loadLength, int loadDiameter,
     length = loadLength;
     diameter = loadDiameter;
     inRepair = loadInRepair;
+    LOG_ACTION("Труба ID " + to_string(id) + " данные загружены из файла");
 }

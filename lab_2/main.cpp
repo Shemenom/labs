@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "PipelineNetwork.h"
+#include "Utils.h"
 #include "Logger.h"
 
 using namespace std;
@@ -25,6 +27,8 @@ void displayMenu() {
 }
 
 int main() {
+    LOG_ACTION("=== ПРОГРАММА ЗАПУЩЕНА ===");
+    
     PipelineNetwork network;
     int choice;
     
@@ -36,6 +40,8 @@ int main() {
             cin.clear(); 
             cin.ignore(10000, '\n'); 
         }
+        
+        LOG_ACTION("Пользователь выбрал пункт меню: " + to_string(choice));
         
         switch (choice) {
             case 1:
@@ -52,32 +58,28 @@ int main() {
                 
             case 4: {
                 cout << "Введите ID трубы для редактирования: ";
-                int id;
-                cin >> id;
+                int id = GetCorrectNumber(1, 1000);
                 network.editPipe(id);
                 break;
             }
                 
             case 5: {
                 cout << "Введите ID КС для редактирования: ";
-                int id;
-                cin >> id;
+                int id = GetCorrectNumber(1, 1000);
                 network.editStation(id);
                 break;
             }
                 
             case 6: {
                 cout << "Введите ID трубы для удаления: ";
-                int id;
-                cin >> id;
+                int id = GetCorrectNumber(1, 1000);
                 network.deletePipe(id);
                 break;
             }
                 
             case 7: {
                 cout << "Введите ID КС для удаления: ";
-                int id;
-                cin >> id;
+                int id = GetCorrectNumber(1, 1000);
                 network.deleteStation(id);
                 break;
             }
@@ -85,15 +87,13 @@ int main() {
             case 8: {
                 cout << "Поиск труб по:\n";
                 cout << "1 - названию, 2 - признаку 'в ремонте': ";
-                int searchType;
-                cin >> searchType;
-                cin.ignore(100, '\n');
+                int searchType = GetCorrectNumber(1, 2);
                 
                 vector<int> foundPipes;
                 if (searchType == 1) {
                     cout << "Введите часть названия: ";
                     string name;
-                    getline(cin, name);
+                    INPUT_LINE(cin, name);
                     foundPipes = network.findPipesByName(name);
                 } else if (searchType == 2) {
                     cout << "В ремонте (0 - да, 1 - нет): ";
@@ -109,20 +109,17 @@ int main() {
             case 9: {
                 cout << "Поиск КС по:\n";
                 cout << "1 - названию, 2 - проценту незадействованных цехов: ";
-                int searchType;
-                cin >> searchType;
-                cin.ignore(100, '\n');
+                int searchType = GetCorrectNumber(1, 2);
                 
                 vector<int> foundStations;
                 if (searchType == 1) {
                     cout << "Введите часть названия: ";
                     string name;
-                    getline(cin, name);
+                    INPUT_LINE(cin, name);
                     foundStations = network.findStationsByName(name);
                 } else if (searchType == 2) {
                     cout << "Минимальный процент незадействованных цехов: ";
-                    double percent;
-                    cin >> percent;
+                    double percent = GetCorrectNumber(0.0, 100.0);
                     foundStations = network.findStationsByUnusedPercentage(percent);
                 }
                 
@@ -133,15 +130,13 @@ int main() {
             case 10: {
                 cout << "Пакетное редактирование труб по:\n";
                 cout << "1 - названию, 2 - признаку 'в ремонте': ";
-                int searchType;
-                cin >> searchType;
-                cin.ignore(100, '\n');
+                int searchType = GetCorrectNumber(1, 2);
                 
                 vector<int> foundPipes;
                 if (searchType == 1) {
                     cout << "Введите часть названия: ";
                     string name;
-                    getline(cin, name);
+                    INPUT_LINE(cin, name);
                     foundPipes = network.findPipesByName(name);
                 } else if (searchType == 2) {
                     cout << "В ремонте (0 - да, 1 - нет): ";
@@ -160,9 +155,11 @@ int main() {
                     network.saveToFile_pipe(file);
                     network.saveToFile_CS(file);
                     file.close();
-                    cout << "Данные сохранены в файл";
+                    cout << "Данные сохранены в файл\n";
+                    LOG_ACTION("Данные успешно сохранены в файл");
                 } else {
-                    cout << "Ошибка открытия файла для записи";
+                    cout << "Ошибка открытия файла для записи\n";
+                    LOG_ERROR("Не удалось открыть файл для записи");
                 }
                 break;
             }
@@ -173,19 +170,24 @@ int main() {
                     network.loadFromFile_pipe(file);
                     network.loadFromFile_CS(file);
                     file.close();
-                    cout << "Данные загружены"; // Исправь опечатку "Даннын"
+                    cout << "Данные загружены\n";
+                    LOG_ACTION("Данные успешно загружены из файла");
                 } else {
-                    cout << "Ошибка открытия файла для записи";
+                    cout << "Ошибка открытия файла для чтения\n";
+                    LOG_ERROR("Не удалось открыть файл для чтения");
                 }
                 break;
             }
                 
             case 0:
                 cout << "Выход из программы\n";
+                LOG_ACTION("Пользователь завершил программу");
                 break;
         }
-        
+                
     } while (choice != 0);
+    
+    LOG_ACTION("=== ПРОГРАММА ЗАВЕРШЕНА ===");
     
     return 0;
 }

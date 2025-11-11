@@ -2,21 +2,25 @@
 #include <iostream>
 #include <limits>
 
-using namespace std;
-
 CompressorStation::CompressorStation(int newId) 
-    : id(newId), numberWorkshop(0), workingWorkshop(0), classWorkshop(0) {}
+    : id(newId), numberWorkshop(0), workingWorkshop(0), classWorkshop(0) {
+    LOG_OBJECT_CREATION("КомпрессорнаяСтанция", id);
+}
 
 double CompressorStation::getUnusedPercentage() const {
     if (numberWorkshop == 0) return 0.0;
-    return (numberWorkshop - workingWorkshop) * 100.0 / numberWorkshop;
+    double percentage = (numberWorkshop - workingWorkshop) * 100.0 / numberWorkshop;
+    LOG_ACTION("Станция ID " + to_string(id) + " процент незадействованных цехов: " + to_string(percentage) + "%");
+    return percentage;
 }
 
 void CompressorStation::setName(const string& newName) {
     if (newName.empty()) {
-        throw invalid_argument("Название не может быть пустым");
+        LOG_ERROR("Название станции не может быть пустым");
+        throw invalid_argument("Название станции не может быть пустым");
     }
     name = newName;
+    LOG_ACTION("Станция ID " + to_string(id) + " название установлено: " + name);
 }
 
 void CompressorStation::setNumberWorkshop(int& number) {
@@ -30,6 +34,7 @@ void CompressorStation::setNumberWorkshop(int& number) {
         }
     }
     numberWorkshop = number;
+    LOG_ACTION("Станция ID " + to_string(id) + " всего цехов: " + to_string(numberWorkshop));
 }
 
 void CompressorStation::setWorkingWorkshop(int& working, int number) {
@@ -43,13 +48,16 @@ void CompressorStation::setWorkingWorkshop(int& working, int number) {
         }
     }
     workingWorkshop = working;
+    LOG_ACTION("Станция ID " + to_string(id) + " работающих цехов: " + to_string(workingWorkshop));
 }
 
 void CompressorStation::setClassWorkshop(int classW) {
     if (classW < 1 || classW > 5) { 
-        throw invalid_argument("Класс цеха должен быть от 1 до 5");
+        LOG_ERROR("Класс станции должен быть от 1 до 5");
+        throw invalid_argument("Класс станции должен быть от 1 до 5");
     }
     classWorkshop = classW;
+    LOG_ACTION("Станция ID " + to_string(id) + " класс установлен: " + to_string(classWorkshop));
 }
 
 void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop) {
@@ -57,4 +65,5 @@ void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop,
     numberWorkshop = loadNumberWorkshop;
     workingWorkshop = loadWorkingWorkshop;
     classWorkshop = loadClassWorkshop;
+    LOG_ACTION("Станция ID " + to_string(id) + " данные загружены из файла");
 }

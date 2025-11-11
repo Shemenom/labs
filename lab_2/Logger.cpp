@@ -1,20 +1,19 @@
 #include "Logger.h"
 #include <iostream>
 
-using namespace std;
-
 Logger::Logger() {
     logFile.open("log.txt", ios::app);
-    logFile << "=== Сессия начата ===" << endl;
+    LOG_ACTION("=== Начало сессии ===");
 }
 
 Logger::~Logger() {
-    logFile << "=== Сессия завершена ===" << endl;
+    LOG_ACTION("=== Конец сессии ===");
     logFile.close();
 }
 
 void Logger::log(const string& text) {
     logFile << text << endl;
+    cerr << "ЛОГ: " << text << endl;
 }
 
 Logger logger;
