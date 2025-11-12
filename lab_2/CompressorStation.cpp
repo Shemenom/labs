@@ -10,7 +10,6 @@ CompressorStation::CompressorStation(int newId) : id(newId), numberWorkshop(0), 
 double CompressorStation::getUnusedPercentage() const {
     if (numberWorkshop == 0) return 0.0;
     double percentage = (numberWorkshop - workingWorkshop) * 100.0 / numberWorkshop;
-    LOG_ACTION("Станция ID " + to_string(id) + " процент незадействованных цехов: " + to_string(percentage) + "%");
     return percentage;
 }
 

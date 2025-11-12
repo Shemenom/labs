@@ -163,6 +163,7 @@ vector<int> PipelineNetwork::findPipesByName(const string& name) {
     for (const auto& [id, pipe] : pipes) {
         if (pipe.getName().find(name) != string::npos) {
             result.push_back(id);
+            LOG_ACTION("ID " + to_string(pipe.getId()) + ", Имя: " + pipe.getName());
         }
     }
     
@@ -179,6 +180,7 @@ vector<int> PipelineNetwork::findPipesByRepairStatus(bool inRepair) {
     for (const auto& [id, pipe] : pipes) {
         if (pipe.isInRepair() == inRepair) {
             result.push_back(id);
+            LOG_ACTION("ID " + to_string(pipe.getId()) + ", Имя: " + pipe.getName());
         }
     }
 
@@ -195,6 +197,7 @@ vector<int> PipelineNetwork::findStationsByName(const string& name) {
     for (const auto& [id, station] : stations) {
         if (station.getName().find(name) != string::npos) {
             result.push_back(id);
+            LOG_ACTION("ID " + to_string(station.getId()) + ", Имя: " + station.getName());
         }
     }
     
@@ -202,7 +205,7 @@ vector<int> PipelineNetwork::findStationsByName(const string& name) {
     LOG_FUNCTION_END();
     return result;
 }
-
+ 
 vector<int> PipelineNetwork::findStationsByUnusedPercentage(double minPercent) {
     LOG_FUNCTION_START();
     LOG_ACTION("Поиск станций по проценту незадействованных цехов >= " + to_string(minPercent) + "%");
@@ -211,6 +214,7 @@ vector<int> PipelineNetwork::findStationsByUnusedPercentage(double minPercent) {
     for (const auto& [id, station] : stations) {
         if (station.getUnusedPercentage() >= minPercent) {
             result.push_back(id);
+            LOG_ACTION("ID " + to_string(station.getId()) + ", Имя: " + station.getName());
         }
     }
     
@@ -313,7 +317,7 @@ void PipelineNetwork::saveToFile_pipe(ofstream& file) {
              << pipe.getDiameter() << " "
              << pipe.isInRepair() << endl;
     }
-    
+
     LOG_ACTION("Сохранено " + to_string(pipes.size()) + " труб в файл");
     LOG_FUNCTION_END();
 }
@@ -380,9 +384,8 @@ void PipelineNetwork::loadFromFile_CS(ifstream& file) {
         LOG_ACTION("Загрузка " + to_string(count) + " станций из файла");
         for (int i = 0; i < count; i++) {
             file >> type;
-            int id = count - i;
+            int id;
             file >>id;
-            
             
             CompressorStation station(id);
             
