@@ -35,7 +35,9 @@ public:
     vector<int> findStationsByUnusedPercentage(double minPercent);
     
     void batchEditPipes(const vector<int>& pipeIds);
-    void viewAllObjects();
+    void viewAllObjects_pipe();
+    void viewAllObjects_CS();
+
     
     void saveToFile_pipe(ofstream& file);
     void saveToFile_CS(ofstream& file);

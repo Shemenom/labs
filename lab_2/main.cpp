@@ -52,7 +52,8 @@ int main() {
                 break;
                 
             case 3:
-                network.viewAllObjects();
+                network.viewAllObjects_pipe();
+                network.viewAllObjects_CS();
                 break;
                 
             case 4: {

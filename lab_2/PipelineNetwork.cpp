@@ -264,13 +264,12 @@ void PipelineNetwork::batchEditPipes(const vector<int>& pipeIds) {
     }
     
     cout << "Отредактировано труб: " << pipesToEdit.size() << endl;
-    LOG_ACTION("Пакетное редактирование завершено: " + to_string(pipesToEdit.size()) + " труб статус изменен на: " + 
-               string(newStatus ? "работает" : "в ремонте"));
+    LOG_ACTION("Пакетное редактирование завершено: " + to_string(pipesToEdit.size()) + " труб статус изменен на: " + string(newStatus ? "работает" : "в ремонте"));
     
     LOG_FUNCTION_END();
 }
 
-void PipelineNetwork::viewAllObjects() {
+void PipelineNetwork::viewAllObjects_pipe() {
     LOG_FUNCTION_START();
     
     cout << "\n=== ТРУБЫ ===\n";
@@ -287,7 +286,13 @@ void PipelineNetwork::viewAllObjects() {
         }
         LOG_ACTION("Отображено " + to_string(pipes.size()) + " труб");
     }
-    
+
+    LOG_FUNCTION_END();
+}
+ 
+void PipelineNetwork::viewAllObjects_CS() {
+    LOG_FUNCTION_START();
+
     cout << "\n=== КОМПРЕССОРНЫЕ СТАНЦИИ ===\n";
     if (stations.empty()) {
         cout << "КС не созданы\n";
