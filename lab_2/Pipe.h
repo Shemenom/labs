@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 #include <stdexcept>
-#include "Utils.h"
+#include "LogUtils.h"
+
+using namespace std;
 
 class Pipe {
 private:

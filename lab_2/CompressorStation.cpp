@@ -1,11 +1,11 @@
 #include "CompressorStation.h"
 #include <iostream>
 #include <limits>
+#include "Utils.h"
 
-CompressorStation::CompressorStation(int newId) 
-    : id(newId), numberWorkshop(0), workingWorkshop(0), classWorkshop(0) {
-    LOG_OBJECT_CREATION("КомпрессорнаяСтанция", id);
-}
+using namespace std;
+
+CompressorStation::CompressorStation(int newId) : id(newId), numberWorkshop(0), workingWorkshop(0), classWorkshop(0) {}
 
 double CompressorStation::getUnusedPercentage() const {
     if (numberWorkshop == 0) return 0.0;
@@ -14,12 +14,8 @@ double CompressorStation::getUnusedPercentage() const {
     return percentage;
 }
 
-void CompressorStation::setName(const string& newName) {
-    if (newName.empty()) {
-        LOG_ERROR("Название станции не может быть пустым");
-        throw invalid_argument("Название станции не может быть пустым");
-    }
-    name = newName;
+void CompressorStation::setName() {
+    INPUT_LINE(cin, name);
     LOG_ACTION("Станция ID " + to_string(id) + " название установлено: " + name);
 }
 

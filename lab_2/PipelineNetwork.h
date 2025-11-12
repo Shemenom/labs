@@ -5,7 +5,9 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "Utils.h"
+#include "LogUtils.h"
+
+using namespace std;
 
 class PipelineNetwork {
 private:
@@ -39,9 +41,4 @@ public:
     void saveToFile_CS(ofstream& file);
     void loadFromFile_pipe(ifstream& file);
     void loadFromFile_CS(ifstream& file);
-    
-    bool pipeExists(int id) const;
-    bool stationExists(int id) const;
-    const unordered_map<int, Pipe>& getPipes() const;
-    const unordered_map<int, CompressorStation>& getStations() const;
 };

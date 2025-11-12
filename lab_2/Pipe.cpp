@@ -3,9 +3,9 @@
 #include <limits>
 #include "Utils.h"
 
-Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {
-    LOG_OBJECT_CREATION("Труба", id);
-}
+using namespace std;
+
+Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
 
 void Pipe::setName() {
     INPUT_LINE(cin, name);

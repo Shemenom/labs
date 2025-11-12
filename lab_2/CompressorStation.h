@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 #include <stdexcept>
-#include "Utils.h"
+#include "LogUtils.h"
+
+using namespace std;
 
 class CompressorStation {
 private:
@@ -22,7 +24,7 @@ public:
     int getWorkingWorkshop() const { return workingWorkshop; }
     int getClassWorkshop() const { return classWorkshop; }
     
-    void setName(const string& newName);
+    void setName();
     void setNumberWorkshop(int& number);
     void setWorkingWorkshop(int& working, int number);
     void setClassWorkshop(int classW);

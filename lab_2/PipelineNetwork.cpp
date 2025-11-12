@@ -6,6 +6,8 @@
 #include <iomanip>
 #include "Utils.h"
 
+using namespace std;
+
 PipelineNetwork::PipelineNetwork() : nextPipeId(1), nextStationId(1) {
     LOG_ACTION("Создана сеть трубопроводов");
 }
@@ -93,16 +95,7 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
     LOG_FUNCTION_START();
     
     cout << "Название КС: ";
-    string name;
-    INPUT_LINE(cin, name);
-    try {
-        station.setName(name);
-    } catch (const invalid_argument& e) {
-        LOG_ERROR("Ошибка названия станции: " + string(e.what()));
-        cout << "Ошибка: " << e.what() << ". Введите название снова: ";
-        INPUT_LINE(cin, name);
-        station.setName(name);
-    }
+    station.setName();
 
     cout << "Количество цехов: ";
     int numberWorkshop = GetCorrectNumber(1, 1000);
@@ -114,14 +107,6 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
 
     cout << "Класс станции (1-5): ";
     int classWorkshop = GetCorrectNumber(1, 5);
-    try {
-        station.setClassWorkshop(classWorkshop);
-    } catch (const invalid_argument& e) {
-        LOG_ERROR("Ошибка класса станции: " + string(e.what()));
-        cout << "Ошибка: " << e.what() << ". Введите класс снова: ";
-        classWorkshop = GetCorrectNumber(1, 5);
-        station.setClassWorkshop(classWorkshop);
-    }
     
     LOG_FUNCTION_END();
 }
@@ -196,7 +181,7 @@ vector<int> PipelineNetwork::findPipesByRepairStatus(bool inRepair) {
             result.push_back(id);
         }
     }
-    
+
     LOG_ACTION("Найдено " + to_string(result.size()) + " труб с указанным статусом ремонта");
     LOG_FUNCTION_END();
     return result;
@@ -294,6 +279,7 @@ void PipelineNetwork::viewAllObjects() {
                  << ", Длина: " << pipe.getLength()
                  << ", Диаметр: " << pipe.getDiameter()
                  << ", В ремонте: " << (pipe.isInRepair() ? "Да" : "Нет") << endl;
+            LOG_ACTION("ID " + to_string(id) + " Название: " + pipe.getName() + ", Длина: " + to_string(pipe.getLength()) + ", Диаметр: " + to_string(pipe.getDiameter()) + "В ремонте: " + (pipe.isInRepair() ? "Да" : "Нет"));
         }
         LOG_ACTION("Отображено " + to_string(pipes.size()) + " труб");
     }
@@ -308,6 +294,7 @@ void PipelineNetwork::viewAllObjects() {
                  << ", Цехов: " << station.getNumberWorkshop() << "/" << station.getWorkingWorkshop()
                  << ", Незадействовано: " << fixed << setprecision(1) << station.getUnusedPercentage() << "%"
                  << ", Класс: " << station.getClassWorkshop() << endl;
+            LOG_ACTION("ID " + to_string(id) + " Название: " + station.getName() + ", Цехов: " + to_string(station.getNumberWorkshop()) + "/" + to_string(station.getWorkingWorkshop()) +", Класс: " + to_string(station.getClassWorkshop()));
         }
         LOG_ACTION("Отображено " + to_string(stations.size()) + " станций");
     }
@@ -393,8 +380,9 @@ void PipelineNetwork::loadFromFile_CS(ifstream& file) {
         LOG_ACTION("Загрузка " + to_string(count) + " станций из файла");
         for (int i = 0; i < count; i++) {
             file >> type;
-            int id;
-            file >> id;
+            int id = count - i;
+            file >>id;
+            
             
             CompressorStation station(id);
             
