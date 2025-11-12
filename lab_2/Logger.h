@@ -1,6 +1,8 @@
 #pragma once
 #include <fstream>
 #include <string>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -9,12 +11,13 @@ private:
     ofstream logFile;
     string filename;
     
+    string generateRandomFilename();
+
 public:
     Logger();
     ~Logger();
     void log(const string& text);
-    void setFilename(const string& newFilename);
-    static string getNextLogFilename();  // Статический метод для получения следующего имени файла
+    string getCurrentLogFilename() const { return filename; }
 };
 
 extern Logger logger;

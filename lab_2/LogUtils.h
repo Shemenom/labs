@@ -7,29 +7,22 @@ using namespace std;
 
 // Макрос для ввода строки с логированием
 #define INPUT_LINE_LOG(in, str) \
-    do { \
         getline(in >> ws, str); \
         logger.log("ВВОД_ПОЛЬЗОВАТЕЛЯ: " + str); \
-    } while(0)
+    
 
 // Макрос для вывода параметра с логированием  
 #define PRINT_PARAM_LOG(out, x) \
-    do { \
         out << #x << "=" << x << endl; \
         logger.log("ВЫВОД_ПАРАМЕТРА: " + string(#x) + "=" + to_string(x)); \
-    } while(0)
 
 // Макрос для логирования действий
 #define LOG_ACTION(action) \
-    do { \
         logger.log(string(action)); \
-    } while(0)
 
 // Макрос для логирования ошибок
 #define LOG_ERROR(error) \
-    do { \
         logger.log("ОШИБКА: " + string(error)); \
-    } while(0)
 
 // Макрос для логирования начала функции
 #define LOG_FUNCTION_START() \

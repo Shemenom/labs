@@ -34,7 +34,7 @@ int main() {
     do {
         displayMenu();
 
-        while (!(cin >> choice) || (choice < 0 || choice > 12)) {
+        while (!(cin >> choice) || (choice < 0 || choice > 13)) {
             cout << "Ошибка! Введите число от 0 до 12: ";
             cin.clear(); 
             cin.ignore(10000, '\n'); 

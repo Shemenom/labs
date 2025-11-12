@@ -8,15 +8,11 @@ using namespace std;
 
 // Макрос для ввода строки
 #define INPUT_LINE(in, str) \
-    do { \
         getline(in >> ws, str); \
-    } while(0)
 
 // Макрос для вывода параметра
 #define PRINT_PARAM(out, x) \
-    do { \
         out << #x << "=" << x << endl; \
-    } while(0)
 
 // Шаблонная функция для получения корректного числа в диапазоне
 template <typename T>
