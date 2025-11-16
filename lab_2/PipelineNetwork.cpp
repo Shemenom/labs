@@ -13,21 +13,14 @@ PipelineNetwork::PipelineNetwork() : nextPipeId(1), nextStationId(1) {
 }
 
 void PipelineNetwork::addPipe() {
-    LOG_FUNCTION_START();
-    
     Pipe pipe(nextPipeId++);
     inputPipeData(pipe);
     pipes[pipe.getId()] = pipe;
     
     cout << "Труба добавлена (ID: " << pipe.getId() << ")\n";
-    LOG_OBJECT_CREATION("Труба", pipe.getId());
-    
-    LOG_FUNCTION_END();
 }
 
-void PipelineNetwork::inputPipeData(Pipe& pipe) {
-    LOG_FUNCTION_START();
-    
+void PipelineNetwork::inputPipeData(Pipe& pipe) {    
     cout << "Название трубы: ";
     pipe.setName();
 
@@ -43,12 +36,9 @@ void PipelineNetwork::inputPipeData(Pipe& pipe) {
     bool inRepair;
     cin >> inRepair;
     pipe.setInRepair(inRepair);
-
-    LOG_FUNCTION_END();
 }
 
 void PipelineNetwork::editPipe(int id) {
-    LOG_FUNCTION_START();
     
     if (pipes.count(id)) {
         LOG_ACTION("Редактирование трубы ID: " + to_string(id));
@@ -59,13 +49,11 @@ void PipelineNetwork::editPipe(int id) {
         LOG_ERROR("Труба с ID " + to_string(id) + " не найдена");
         cout << "Труба с ID " << id << " не найдена\n";
     }
-    
-    LOG_FUNCTION_END();
+
 }
 
 void PipelineNetwork::deletePipe(int id) {
-    LOG_FUNCTION_START();
-    
+
     if (pipes.count(id)) {
         pipes.erase(id);
         cout << "Труба удалена\n";
@@ -74,12 +62,10 @@ void PipelineNetwork::deletePipe(int id) {
         LOG_ERROR("Труба с ID " + to_string(id) + " не найдена");
         cout << "Труба с ID " << id << " не найдена\n";
     }
-    
-    LOG_FUNCTION_END();
 }
 
 void PipelineNetwork::addStation() {
-    LOG_FUNCTION_START();
+
     
     CompressorStation station(nextStationId++);
     inputStationData(station);
@@ -88,11 +74,9 @@ void PipelineNetwork::addStation() {
     cout << "Компрессорная станция добавлена (ID: " << station.getId() << ")\n";
     LOG_OBJECT_CREATION("КомпрессорнаяСтанция", station.getId());
     
-    LOG_FUNCTION_END();
 }
 
 void PipelineNetwork::inputStationData(CompressorStation& station) {
-    LOG_FUNCTION_START();
     
     cout << "Название КС: ";
     station.setName();
@@ -108,11 +92,9 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
     cout << "Класс станции (1-5): ";
     int classWorkshop = GetCorrectNumber(1, 5);
     
-    LOG_FUNCTION_END();
 }
 
 void PipelineNetwork::editStation(int id) {
-    LOG_FUNCTION_START();
     
     if (stations.count(id)) {
         LOG_ACTION("Редактирование станции ID: " + to_string(id));
@@ -137,11 +119,9 @@ void PipelineNetwork::editStation(int id) {
         cout << "Станция с ID " << id << " не найдена\n";
     }
     
-    LOG_FUNCTION_END();
 }
 
 void PipelineNetwork::deleteStation(int id) {
-    LOG_FUNCTION_START();
     
     if (stations.count(id)) {
         stations.erase(id);
@@ -152,11 +132,9 @@ void PipelineNetwork::deleteStation(int id) {
         cout << "Станция с ID " << id << " не найдена\n";
     }
     
-    LOG_FUNCTION_END();
 }
 
 vector<int> PipelineNetwork::findPipesByName(const string& name) {
-    LOG_FUNCTION_START();
     LOG_ACTION("Поиск труб по названию: " + name);
     
     vector<int> result;
@@ -168,12 +146,10 @@ vector<int> PipelineNetwork::findPipesByName(const string& name) {
     }
     
     LOG_ACTION("Найдено " + to_string(result.size()) + " труб с названием содержащим: " + name);
-    LOG_FUNCTION_END();
     return result;
 }
 
 vector<int> PipelineNetwork::findPipesByRepairStatus(bool inRepair) {
-    LOG_FUNCTION_START();
     LOG_ACTION("Поиск труб по статусу ремонта: " + string(inRepair ? "в ремонте" : "работает"));
     
     vector<int> result;
@@ -185,12 +161,10 @@ vector<int> PipelineNetwork::findPipesByRepairStatus(bool inRepair) {
     }
 
     LOG_ACTION("Найдено " + to_string(result.size()) + " труб с указанным статусом ремонта");
-    LOG_FUNCTION_END();
     return result;
 }
 
 vector<int> PipelineNetwork::findStationsByName(const string& name) {
-    LOG_FUNCTION_START();
     LOG_ACTION("Поиск станций по названию: " + name);
     
     vector<int> result;
@@ -202,12 +176,10 @@ vector<int> PipelineNetwork::findStationsByName(const string& name) {
     }
     
     LOG_ACTION("Найдено " + to_string(result.size()) + " станций с названием содержащим: " + name);
-    LOG_FUNCTION_END();
     return result;
 }
  
 vector<int> PipelineNetwork::findStationsByUnusedPercentage(double minPercent) {
-    LOG_FUNCTION_START();
     LOG_ACTION("Поиск станций по проценту незадействованных цехов >= " + to_string(minPercent) + "%");
     
     vector<int> result;
@@ -219,12 +191,10 @@ vector<int> PipelineNetwork::findStationsByUnusedPercentage(double minPercent) {
     }
     
     LOG_ACTION("Найдено " + to_string(result.size()) + " станций с процентом незадействованных цехов >= " + to_string(minPercent) + "%");
-    LOG_FUNCTION_END();
     return result;
 }
 
 void PipelineNetwork::batchEditPipes(const vector<int>& pipeIds) {
-    LOG_FUNCTION_START();
     
     if (pipeIds.empty()) {
         LOG_ACTION("Не найдено труб для пакетного редактирования");

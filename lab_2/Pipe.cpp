@@ -2,10 +2,13 @@
 #include <iostream>
 #include <limits>
 #include "Utils.h"
+#include "LogUtils.h"
 
 using namespace std;
 
-Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
+Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {
+    LOG_OBJECT_CREATION("Труба", id);
+}
 
 void Pipe::setName() {
     INPUT_LINE(cin, name);

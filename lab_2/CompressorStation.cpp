@@ -47,9 +47,15 @@ void CompressorStation::setWorkingWorkshop(int& working, int number) {
 }
 
 void CompressorStation::setClassWorkshop(int classW) {
-    if (classW < 1 || classW > 5) { 
-        LOG_ERROR("Класс станции должен быть от 1 до 5");
-        throw invalid_argument("Класс станции должен быть от 1 до 5");
+    while (classW < 1 || classW > 5) {
+        cout << "Ошибка: класс станции должен быть от 1 до 5. Введите снова: ";
+        cin >> classW;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            classW = 0; // сброс для продолжения цикла
+        }
+        LOG_ERROR("Введен неверный класс станции: " + to_string(classW));
     }
     classWorkshop = classW;
     LOG_ACTION("Станция ID " + to_string(id) + " класс установлен: " + to_string(classWorkshop));

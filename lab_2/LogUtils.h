@@ -9,12 +9,6 @@ using namespace std;
 #define INPUT_LINE_LOG(in, str) \
         getline(in >> ws, str); \
         logger.log("ВВОД_ПОЛЬЗОВАТЕЛЯ: " + str); \
-    
-
-// Макрос для вывода параметра с логированием  
-#define PRINT_PARAM_LOG(out, x) \
-        out << #x << "=" << x << endl; \
-        logger.log("ВЫВОД_ПАРАМЕТРА: " + string(#x) + "=" + to_string(x)); \
 
 // Макрос для логирования действий
 #define LOG_ACTION(action) \
