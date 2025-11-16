@@ -22,6 +22,11 @@ void displayMenu() {
     cout << "10. Пакетное редактирование труб\n";
     cout << "11. Сохранить данные\n";
     cout << "12. Загрузить данные\n";
+    cout << "13. Соединить КС\n";
+    cout << "14. Разъединить КС\n";
+    cout << "15. Просмотр сети\n";
+    cout << "16. Топологическая сортировка\n";
+    cout << "17. Проверить на циклы\n";
     cout << "0. Выход\n";
     cout << "Выберите действие: ";
 }
@@ -34,8 +39,8 @@ int main() {
     do {
         displayMenu();
 
-        while (!(cin >> choice) || (choice < 0 || choice > 13)) {
-            cout << "Ошибка! Введите число от 0 до 12: ";
+        while (!(cin >> choice) || (choice < 0 || choice > 17)) {
+            cout << "Ошибка! Введите число от 0 до 17: ";
             cin.clear(); 
             cin.ignore(10000, '\n'); 
         }
@@ -178,6 +183,26 @@ int main() {
                 }
                 break;
             }
+
+            case 13:
+                network.connectStations();
+                break;
+                
+            case 14:
+                network.disconnectStations();
+                break;
+                
+            case 15:
+                network.viewNetwork();
+                break;
+                
+            case 16:
+                network.topologicalSort();
+                break;
+                
+            case 17:
+                network.checkNetworkCycles();
+                break;
                 
             case 0:
                 cout << "Выход из программы\n";
