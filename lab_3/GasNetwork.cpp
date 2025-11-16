@@ -1,4 +1,5 @@
 #include "GasNetwork.h"
+#include "PipelineNetwork.h"
 #include <iostream>
 #include <iomanip>
 
@@ -68,10 +69,8 @@ bool GasNetwork::connectStations(int sourceId, int destinationId, int diameter) 
             // Здесь должна быть логика создания новой трубы
             // Для простоты просто возвращаем false
             LOG_ACTION("Пользователь выбрал создание новой трубы");
-            cout << "Создайте новую трубу через меню добавления труб.\n";
-            return false;
-        } else {
-            LOG_ACTION("Пользователь отказался от создания новой трубы");
+            PipelineNetwork network;
+            network.addPipe();
             return false;
         }
     }
