@@ -44,6 +44,7 @@ vector<int> Graph::topologicalSort() {
     return result;
 }
 
+// проверка на циклы
 bool Graph::hasCycle() {
     LOG_ACTION("Проверка графа на циклы");
     unordered_map<int, bool> visited;

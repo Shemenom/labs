@@ -1,6 +1,5 @@
-PIPES 2
-PIPE 1 weewf 23 23 0
-PIPE 2 ewwewew 23 34 0
+PIPES 1
+PIPE 1 аолваолв 21 500 1
 STATIONS 2
-STATION 1 dldldld 23 1 0
-STATION 2 wvfkvfm 23 22 0
+STATION 2 лщмвщ 23 23 0
+STATION 1 влаолва 23 23 0

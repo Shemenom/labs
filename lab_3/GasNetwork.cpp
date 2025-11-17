@@ -10,6 +10,7 @@ GasNetwork::GasNetwork(unordered_map<int, Pipe>& pipeRef, unordered_map<int, Com
     LOG_ACTION("Создана газовая сеть");
 }
 
+// проверка используеться ли труба в каком-либо соединении 
 bool GasNetwork::isPipeConnected(int pipeId) {
     for (const auto& conn : connections) {
         if (conn.pipeId == pipeId) {
@@ -19,6 +20,7 @@ bool GasNetwork::isPipeConnected(int pipeId) {
     return false;
 }
 
+// соединение основное
 bool GasNetwork::connectStations(int sourceId, int destinationId, int diameter) {
     LOG_ACTION("Попытка соединения КС " + to_string(sourceId) + " -> КС " + to_string(destinationId) + " диаметром " + to_string(diameter));
     
@@ -71,7 +73,7 @@ bool GasNetwork::connectStations(int sourceId, int destinationId, int diameter) 
             LOG_ACTION("Пользователь выбрал создание новой трубы");
             PipelineNetwork network;
             network.addPipe();
-            return false;
+            foundPipeId = pipes.size() + 1;
         }
     }
     
@@ -90,8 +92,7 @@ bool GasNetwork::connectStations(int sourceId, int destinationId, int diameter) 
     cout << "КС " << sourceId << " соединена с КС " << destinationId 
          << " трубой ID " << foundPipeId << " (диаметр: " << diameter << " мм)\n";
     
-    LOG_ACTION("Успешное соединение: КС " + to_string(sourceId) + " -> КС " + to_string(destinationId) + 
-               " трубой ID " + to_string(foundPipeId));
+    LOG_ACTION("Успешное соединение: КС " + to_string(sourceId) + " -> КС " + to_string(destinationId) + " трубой ID " + to_string(foundPipeId));
     
     return true;
 }

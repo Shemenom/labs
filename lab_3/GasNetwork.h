@@ -17,8 +17,7 @@ struct Connection {
     int destinationStationId;
     int diameter;
     
-    Connection(int pipe, int source, int dest, int diam) 
-        : pipeId(pipe), sourceStationId(source), destinationStationId(dest), diameter(diam) {}
+    Connection(int pipe, int source, int dest, int diam) : pipeId(pipe), sourceStationId(source), destinationStationId(dest), diameter(diam) {}
 };
 
 class GasNetwork {
@@ -41,4 +40,3 @@ public:
     bool checkCycles();
     vector<Connection> getConnections() const { return connections; }
 };
-

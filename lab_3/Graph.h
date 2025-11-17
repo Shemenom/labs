@@ -10,8 +10,8 @@ using namespace std;
 
 class Graph {
 private:
-    unordered_map<int, vector<int>> adjList;
-    unordered_set<int> vertices;
+    unordered_map<int, vector<int>> adjList; // смежные вершины
+    unordered_set<int> vertices; // вершины графа 
     
     void topologicalSortUtil(int v, unordered_map<int, bool>& visited, stack<int>& stack);
 
