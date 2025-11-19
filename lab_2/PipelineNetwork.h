@@ -15,6 +15,9 @@ private:
     unordered_map<int, CompressorStation> stations;
     int nextPipeId;
     int nextStationId;
+
+    int findFreePipeId();  // НОВЫЙ МЕТОД
+    int findFreeStationId(); // НОВЫЙ МЕТОД
 public:
     PipelineNetwork();
     
@@ -42,4 +45,6 @@ public:
     void saveToFile_CS(ofstream& file);
     void loadFromFile_pipe(ifstream& file);
     void loadFromFile_CS(ifstream& file);
+
+    void loadDataFromLog(); // НОВАЯ ФУНКЦИЯ
 };

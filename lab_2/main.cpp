@@ -22,6 +22,7 @@ void displayMenu() {
     cout << "10. Пакетное редактирование труб\n";
     cout << "11. Сохранить данные\n";
     cout << "12. Загрузить данные\n";
+    cout << "13: Загрузить данные с лог файла\n";
     cout << "0. Выход\n";
     cout << "Выберите действие: ";
 }
@@ -40,7 +41,7 @@ int main() {
             cin.ignore(10000, '\n'); 
         }
         
-        logger.log("Пользователь выбрал пункт меню: " + to_string(choice));
+        logger.log("MENU: " + to_string(choice));
         
         switch (choice) {
             case 1:
@@ -176,6 +177,11 @@ int main() {
                     cout << "Ошибка открытия файла для чтения\n";
                     logger.log("ОШИБКА: Не удалось открыть файл для чтения");
                 }
+                break;
+            }
+
+            case 13: {
+                network.loadDataFromLog();
                 break;
             }
                 

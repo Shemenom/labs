@@ -12,8 +12,17 @@ PipelineNetwork::PipelineNetwork() : nextPipeId(1), nextStationId(1) {
     LOG_ACTION("Создана сеть трубопроводов");
 }
 
+int PipelineNetwork::findFreePipeId() {
+    int id = 1;
+    while (pipes.count(id) > 0) {
+        id++;
+    }
+    return id;
+}
+
 void PipelineNetwork::addPipe() {
-    Pipe pipe(nextPipeId++);
+    int freeId = findFreePipeId();
+    Pipe pipe(freeId);
     inputPipeData(pipe);
     pipes[pipe.getId()] = pipe;
     
@@ -25,16 +34,15 @@ void PipelineNetwork::inputPipeData(Pipe& pipe) {
     pipe.setName();
 
     cout << "Длина: ";
-    double length = GetCorrectNumber(0.1, 10000.0);
+    double length = GetCorrectNumberLog(0.1, 10000.0);
     pipe.setLength(length);
 
     cout << "Диаметр: ";
-    int diameter = GetCorrectNumber(1, 5000);
+    int diameter = GetCorrectNumberLog(1, 5000);
     pipe.setDiameter(diameter);
 
     cout << "Состояние (0 - в ремонте, 1 - работает): ";
-    bool inRepair;
-    cin >> inRepair;
+    bool inRepair = GetCorrectNumberLog(0, 1);
     pipe.setInRepair(inRepair);
 }
 
@@ -64,10 +72,18 @@ void PipelineNetwork::deletePipe(int id) {
     }
 }
 
-void PipelineNetwork::addStation() {
+int PipelineNetwork::findFreeStationId() {
+    int id = 1;
+    while (stations.count(id) > 0) {
+        id++;
+    }
+    return id;
+}
 
-    
-    CompressorStation station(nextStationId++);
+
+void PipelineNetwork::addStation() {
+    int freeId = findFreeStationId();
+    CompressorStation station(freeId);
     inputStationData(station);
     stations[station.getId()] = station;
     
@@ -77,21 +93,20 @@ void PipelineNetwork::addStation() {
 }
 
 void PipelineNetwork::inputStationData(CompressorStation& station) {
-    
     cout << "Название КС: ";
     station.setName();
 
     cout << "Количество цехов: ";
-    int numberWorkshop = GetCorrectNumber(1, 1000);
+    int numberWorkshop = GetCorrectNumberLog(1, 1000);
     station.setNumberWorkshop(numberWorkshop);
 
     cout << "Количество работающих цехов: ";
-    int workingWorkshop = GetCorrectNumber(0, numberWorkshop);
+    int workingWorkshop = GetCorrectNumberLog(0, numberWorkshop);
     station.setWorkingWorkshop(workingWorkshop, station.getNumberWorkshop());
 
     cout << "Класс станции (1-5): ";
-    int classWorkshop = GetCorrectNumber(1, 5);
-    
+    int classWorkshop = GetCorrectNumberLog(1, 5);
+    station.setClassWorkshop(classWorkshop);
 }
 
 void PipelineNetwork::editStation(int id) {
@@ -381,4 +396,53 @@ void PipelineNetwork::loadFromFile_CS(ifstream& file) {
     }
     
     LOG_FUNCTION_END();
+}
+
+void PipelineNetwork::loadDataFromLog() {
+    cout << "Загрузка данных из лог-файла\n";
+    
+    ifstream logFile(logger.getCurrentLogFilename());
+    if (logFile.is_open()) {
+        string line;
+        
+        while (logFile >> line) {
+            if (line == "MENU:") {
+                int menuNumber;
+                logFile >> menuNumber;
+                
+                if (menuNumber == 1) {
+                    // Создаем новую трубу
+                    Pipe pipe(nextPipeId++);
+                    string name;
+                    double length;
+                    int diameter;
+                    bool status;
+                    
+                    logFile >> name >> length >> diameter >> status;
+                    
+                    pipe.loadData(name, length, diameter, status);
+                    pipes[pipe.getId()] = pipe;
+                    
+                    cout << "Труба загружена: " << name << " " << length << " " << diameter << " " << status << endl;
+                }
+                else if (menuNumber == 2) {
+                    // Создаем новую КС
+                    CompressorStation station(nextStationId++);
+                    string name;
+                    int total, working, classStation;
+                    
+                    logFile >> name >> total >> working >> classStation;
+                    
+                    station.loadData(name, total, working, classStation);
+                    stations[station.getId()] = station;
+                    
+                    cout << "КС загружена: " << name << " " << total << " " << working << " " << classStation << endl;
+                }
+            }
+        }
+        logFile.close();
+        cout << "Данные из лога загружены в сеть\n";
+    } else {
+        cout << "Не удалось открыть лог-файл\n";
+    }
 }

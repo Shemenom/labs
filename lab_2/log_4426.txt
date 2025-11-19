@@ -1,0 +1,51 @@
+MENU: 13
+MENU: 3
+MENU: 1
+вбвбъ
+12.000000
+12
+1
+MENU: 6
+1
+MENU: 13
+MENU: 3
+MENU: 1
+ы
+12.000000
+12
+1
+MENU: 13
+MENU: 3
+MENU: 1
+цув
+12.000000
+12
+1
+MENU: 3
+MENU: 13
+MENU: 3
+MENU: 6
+2
+MENU: 6
+2
+MENU: 6
+3
+MENU: 6
+4
+MENU: 6
+4
+MENU: 6
+5
+MENU: 6
+6
+MENU: 6
+7
+MENU: 6
+8
+MENU: 6
+9
+MENU: 3
+MENU: 13
+MENU: 3
+MENU: 0
+Пользователь завершил программу

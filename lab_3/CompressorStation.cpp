@@ -53,7 +53,7 @@ void CompressorStation::setClassWorkshop(int classW) {
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            classW = 0; // сброс для продолжения цикла
+            classW = 0; // сброс для продолжения циклак
         }
         LOG_ERROR("Введен неверный класс станции: " + to_string(classW));
     }

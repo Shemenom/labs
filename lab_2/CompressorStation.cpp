@@ -14,8 +14,7 @@ double CompressorStation::getUnusedPercentage() const {
 }
 
 void CompressorStation::setName() {
-    INPUT_LINE(cin, name);
-    LOG_ACTION("Станция ID " + to_string(id) + " название установлено: " + name);
+    INPUT_LINE_LOG(cin, name);
 }
 
 void CompressorStation::setNumberWorkshop(int& number) {
@@ -29,7 +28,6 @@ void CompressorStation::setNumberWorkshop(int& number) {
         }
     }
     numberWorkshop = number;
-    LOG_ACTION("Станция ID " + to_string(id) + " всего цехов: " + to_string(numberWorkshop));
 }
 
 void CompressorStation::setWorkingWorkshop(int& working, int number) {
@@ -43,7 +41,6 @@ void CompressorStation::setWorkingWorkshop(int& working, int number) {
         }
     }
     workingWorkshop = working;
-    LOG_ACTION("Станция ID " + to_string(id) + " работающих цехов: " + to_string(workingWorkshop));
 }
 
 void CompressorStation::setClassWorkshop(int classW) {
@@ -53,12 +50,10 @@ void CompressorStation::setClassWorkshop(int classW) {
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            classW = 0; // сброс для продолжения цикла
+            classW = 0;
         }
-        LOG_ERROR("Введен неверный класс станции: " + to_string(classW));
     }
     classWorkshop = classW;
-    LOG_ACTION("Станция ID " + to_string(id) + " класс установлен: " + to_string(classWorkshop));
 }
 
 void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop) {
@@ -66,5 +61,4 @@ void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop,
     numberWorkshop = loadNumberWorkshop;
     workingWorkshop = loadWorkingWorkshop;
     classWorkshop = loadClassWorkshop;
-    LOG_ACTION("Станция ID " + to_string(id) + " данные загружены из файла");
 }
