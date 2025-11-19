@@ -47,17 +47,15 @@ void PipelineNetwork::inputPipeData(Pipe& pipe) {
 }
 
 void PipelineNetwork::editPipe(int id) {
-    
     if (pipes.count(id)) {
-        LOG_ACTION("Редактирование трубы ID: " + to_string(id));
-        inputPipeData(pipes[id]);
-        cout << "Труба отредактирована\n";
-        LOG_ACTION("Труба ID " + to_string(id) + " успешно отредактирована");
+        cout << "Текущий статус ремонта: " << (pipes[id].isInRepair() ? "в ремонте" : "работает") << endl;
+        cout << "Новый статус (0 - в ремонте, 1 - работает): ";
+        bool newStatus = GetCorrectNumberLog(0, 1);
+        pipes[id].setInRepair(newStatus);
+        cout << "Статус трубы обновлен\n";
     } else {
-        LOG_ERROR("Труба с ID " + to_string(id) + " не найдена");
         cout << "Труба с ID " << id << " не найдена\n";
     }
-
 }
 
 void PipelineNetwork::deletePipe(int id) {

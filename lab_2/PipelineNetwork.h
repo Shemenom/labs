@@ -16,8 +16,8 @@ private:
     int nextPipeId;
     int nextStationId;
 
-    int findFreePipeId();  // НОВЫЙ МЕТОД
-    int findFreeStationId(); // НОВЫЙ МЕТОД
+    int findFreePipeId();  
+    int findFreeStationId();
 public:
     PipelineNetwork();
     
@@ -46,5 +46,5 @@ public:
     void loadFromFile_pipe(ifstream& file);
     void loadFromFile_CS(ifstream& file);
 
-    void loadDataFromLog(); // НОВАЯ ФУНКЦИЯ
+    void loadDataFromLog();
 };

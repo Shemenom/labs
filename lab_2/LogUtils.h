@@ -9,13 +9,6 @@ using namespace std;
         getline(in >> ws, str); \
         logger.log(str); \
 
-#define LOG_ACTION(action) // ничего
-#define LOG_ERROR(error) // ничего  
-#define LOG_FUNCTION_START() // ничего
-#define LOG_FUNCTION_END() // ничего
-#define LOG_OBJECT_CREATION(type, id) // ничего
-#define LOG_OBJECT_DELETION(type, id) // ничего
-
 template <typename T>
 T GetCorrectNumberLog(T min, T max)
 {
