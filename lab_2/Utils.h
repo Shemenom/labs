@@ -6,13 +6,8 @@
 
 using namespace std;
 
-// Макрос для ввода строки
 #define INPUT_LINE(in, str) \
         getline(in >> ws, str); \
-
-// Макрос для вывода параметра
-#define PRINT_PARAM(out, x) \
-        out << #x << "=" << x << endl; \
 
 // Шаблонная функция для получения корректного числа в диапазоне
 template <typename T>
