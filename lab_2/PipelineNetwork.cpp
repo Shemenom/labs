@@ -92,7 +92,7 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
 
     cout << "Количество работающих цехов: ";
     int workingWorkshop = GetCorrectNumberLog(0, numberWorkshop);
-    station.setWorkingWorkshop(workingWorkshop, station.getNumberWorkshop());
+    station.setWorkingWorkshop(workingWorkshop);
 
     cout << "Класс станции (1-5): ";
     int classWorkshop = GetCorrectNumberLog(1, 5);
@@ -102,19 +102,10 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
 void PipelineNetwork::editStation(int id) {
     if (stations.count(id)) {
         cout << "Запуск цеха (+1), остановка цеха (-1): ";
-        int change;
-        cin >> change;
+        int change = GetCorrectNumberLog(-1, 1);
         
-        int currentWorking = stations[id].getWorkingWorkshop();
-        int number = stations[id].getNumberWorkshop();
-        int newWorking = currentWorking + change;
-        
-        if (newWorking >= 0 && newWorking <= number) {
-            stations[id].setWorkingWorkshop(newWorking, number);
-            cout << "Количество работающих цехов: " << stations[id].getWorkingWorkshop() << endl;
-        } else {
-            cout << "Недопустимое количество!\n";
-        }
+        stations[id].setWorkingWorkshop(change); 
+        cout << "Количество работающих цехов: " << stations[id].getWorkingWorkshop() << endl;
     } else {
         cout << "Станция с ID " << id << " не найдена\n";
     }

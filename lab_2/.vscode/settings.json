@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "string": "cpp",
         "__locale": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "limits": "cpp",
+        "ios": "cpp",
+        "typeinfo": "cpp"
     }
 }

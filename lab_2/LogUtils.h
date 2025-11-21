@@ -19,7 +19,5 @@ T GetCorrectNumberLog(T min, T max)
         cin.ignore(10000, '\n');
         cout << "Введите число (" << min << "-" << max << "):";
     }
-    
-    logger.log(to_string(x));
     return x;
 }

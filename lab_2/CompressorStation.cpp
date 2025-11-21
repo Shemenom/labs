@@ -30,9 +30,10 @@ void CompressorStation::setNumberWorkshop(int& number) {
     numberWorkshop = number;
 }
 
-void CompressorStation::setWorkingWorkshop(int& working, int number) {
-    while (working < 0 || working > number) {
-        cout << "Количество работающих цехов должно быть от 0 до " << number << ": ";
+void CompressorStation::setWorkingWorkshop(int& working) {
+    // Используем numberWorkshop напрямую (мы внутри класса)
+    while (working < 0 || working > numberWorkshop) {
+        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
         cin >> working;
         if (cin.fail()) {
             cin.clear();
@@ -41,6 +42,18 @@ void CompressorStation::setWorkingWorkshop(int& working, int number) {
         }
     }
     workingWorkshop = working;
+}
+
+void CompressorStation::setWorkingEditWorkshop(int& change) {
+    int newWorking = workingWorkshop + change;
+    
+    while (newWorking < 0 || newWorking > numberWorkshop) {
+        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop 
+             << ". Текущее: " << workingWorkshop << ". Введите изменение: ";
+        cin >> change;
+        newWorking = workingWorkshop + change;
+    }
+    workingWorkshop = newWorking;
 }
 
 void CompressorStation::setClassWorkshop(int classW) {

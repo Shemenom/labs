@@ -10,7 +10,7 @@ using namespace std;
 
 void displayMenu() {
     cout << "\n=== МЕНЮ УПРАВЛЕНИЯ ТРУБОПРОВОДОМ ===\n";
-    cout << "1. Добавить трубу\n";
+    cout << "1. Добаивть трубу\n";
     cout << "2. Добавить КС\n";
     cout << "3. Просмотр всех объектов\n";
     cout << "4. Редактировать трубу\n";
@@ -28,8 +28,9 @@ void displayMenu() {
 }
 
 int main() {
-
     PipelineNetwork network;
+    Pipe pipe;
+    CompressorStation CS;
     int choice;
     
     do {
@@ -41,15 +42,24 @@ int main() {
             cin.ignore(10000, '\n'); 
         }
         
-        logger.log("MENU: " + to_string(choice));
+        logger.log(to_string(choice));
         
         switch (choice) {
             case 1:
+            {
                 network.addPipe();
+                logger.log(pipe.getName());
+                logger.log(to_string(pipe.getLength()));
+                logger.log(to_string(pipe.getDiameter()));
+                logger.log(to_string(pipe.isInRepair()));
                 break;
-                
+            }
             case 2:
                 network.addStation();
+                logger.log(CS.getName());
+                logger.log(to_string(CS.getNumberWorkshop()));
+                logger.log(to_string(CS.getNumberWorkshop()));
+                logger.log(to_string(CS.getClassWorkshop()));
                 break;
                 
             case 3:
@@ -96,11 +106,13 @@ int main() {
                     string name;
                     INPUT_LINE_LOG(cin, name);
                     foundPipes = network.findPipesByName(name);
+                    logger.log(name);
                 } else if (searchType == 2) {
                     cout << "В ремонте (0 - да, 1 - нет): ";
                     bool status;
                     cin >> status;
                     foundPipes = network.findPipesByRepairStatus(status);
+                    logger.log(to_string(status));
                 }
                 
                 cout << "Найдено труб: " << foundPipes.size() << endl;
@@ -118,10 +130,12 @@ int main() {
                     string name;
                     INPUT_LINE_LOG(cin, name);
                     foundStations = network.findStationsByName(name);
+                    logger.log(name);
                 } else if (searchType == 2) {
                     cout << "Минимальный процент незадействованных цехов: ";
                     double percent = GetCorrectNumberLog(0.0, 100.0);
                     foundStations = network.findStationsByUnusedPercentage(percent);
+                    logger.log(to_string(percent));
                 }
                 
                 cout << "Найдено КС: " << foundStations.size() << endl;
@@ -139,13 +153,15 @@ int main() {
                     string name;
                     INPUT_LINE_LOG(cin, name);
                     foundPipes = network.findPipesByName(name);
+                    logger.log(name);
                 } else if (searchType == 2) {
                     cout << "В ремонте (0 - да, 1 - нет): ";
                     bool status;
                     cin >> status;
                     foundPipes = network.findPipesByRepairStatus(status);
+                    logger.log(to_string(status));
                 }
-                
+
                 network.batchEditPipes(foundPipes);
                 break;
             }
