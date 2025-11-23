@@ -42,7 +42,7 @@ int main() {
             cin.ignore(10000, '\n'); 
         }
         
-        logger.log(to_string(choice));
+        logger.log("MENU: " + to_string(choice));
         
         switch (choice) {
             case 1:

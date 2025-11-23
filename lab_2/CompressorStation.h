@@ -26,7 +26,8 @@ public:
     
     void setName();
     void setNumberWorkshop(int& number);
-    void setWorkingWorkshop(int& working);
+    void setWorkingWorkshop();
+    void setWorkingWorkshop(int& change);
     void setClassWorkshop(int classW);
 
     void setWorkingEditWorkshop(int& change);
