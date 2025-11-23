@@ -23,13 +23,13 @@ public:
     
     void addPipe();
     void inputPipeData(Pipe& pipe);
-    void editPipe(int id);
-    void deletePipe(int id);
+    void editPipe();
+    void deletePipe();
     
     void addStation();
     void inputStationData(CompressorStation& station);
-    void editStation(int id);
-    void deleteStation(int id);
+    void editStation();
+    void deleteStation();
     
     vector<int> findPipesByName(const string& name);
     vector<int> findPipesByRepairStatus(bool inRepair);

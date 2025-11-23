@@ -34,14 +34,16 @@ void CompressorStation::setWorkingWorkshop() {
     }
 }
 
-void CompressorStation::setWorkingWorkshop(int& change) {
+void CompressorStation::setWorkingEditWorkshop() {
     // Используем numberWorkshop напрямую
-    workingWorkshop += change;
-    while ((workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
+    cout << "Запуск цеха (+1), остановка цеха (-1): ";
+    int change;
+    while (!(cin >> change) || ((workingWorkshop + change) < 0) || ((workingWorkshop + change) > numberWorkshop)) {
         cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+    workingWorkshop += change;
 }
 
 void CompressorStation::setClassWorkshop() {

@@ -33,36 +33,44 @@ void PipelineNetwork::inputPipeData(Pipe& pipe) {
     pipe.setName();
 
     cout << "Длина: ";
-   // double length = GetCorrectNumberLog(0.1, 10000.0);
     pipe.setLength();
 
     cout << "Диаметр: ";
-    //int diameter = GetCorrectNumberLog(1, 5000);
     pipe.setDiameter();
 
     cout << "Состояние (0 - в ремонте, 1 - работает): ";
-    // bool inRepair = GetCorrectNumberLog(0, 1);
     pipe.setInRepair();
 }
 
-void PipelineNetwork::editPipe(int id) {
-    if (pipes.count(id)) {
-        cout << "Текущий статус ремонта: " << (pipes[id].isInRepair() ? "в ремонте" : "работает") << endl;
-        cout << "Новый статус (0 - в ремонте, 1 - работает): ";
-        //bool newStatus = GetCorrectNumberLog(0, 1);
-        pipes[id].setInRepair();
-        cout << "Статус трубы обновлен\n";
-    } else {
-        cout << "Труба с ID " << id << " не найдена\n";
+void PipelineNetwork::editPipe() {
+    int id;
+    while (1) {
+        cout << "Введите ID трубы для редактирования: ";
+        cin >> id;
+        if (pipes.count(id)) {
+            cout << "Текущий статус ремонта: " << (pipes[id].isInRepair() ? "в ремонте" : "работает") << endl;
+            cout << "Новый статус (0 - в ремонте, 1 - работает): ";
+            pipes[id].setInRepair();
+            cout << "Статус трубы обновлен\n";
+            break;
+        } else {
+            cout << "Труба с ID " << id << " не найдена\n";
+        }
     }
 }
 
-void PipelineNetwork::deletePipe(int id) {
-    if (pipes.count(id)) {
-        pipes.erase(id);
-        cout << "Труба удалена\n";
-    } else {
-        cout << "Труба с ID " << id << " не найдена\n";
+void PipelineNetwork::deletePipe() {
+    int id;
+    while (1) {
+        cout << "Введите ID трубы для удаления: ";
+        cin >> id;
+        if (pipes.count(id)) {
+            pipes.erase(id);
+            cout << "Труба удалена\n";
+            break;
+        } else {
+            cout << "Труба с ID " << id << " не найдена\n";
+        }
     }
 }
 
@@ -97,26 +105,38 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
     station.setClassWorkshop();
 }
 
-void PipelineNetwork::editStation(int id) {
-    if (stations.count(id)) {
-        cout << "Запуск цеха (+1), остановка цеха (-1): ";
-        int change = GetCorrectNumberLog(-1, 1);
-        stations[id].setWorkingWorkshop(change); 
-    } else {
-        cout << "Станция с ID " << id << " не найдена\n";
+void PipelineNetwork::editStation() {
+    int id;
+    while (1) {
+        cout << "Введите ID КС для редактирования: ";
+        cin >> id;
+        if (stations.count(id)) {
+            stations[id].setWorkingEditWorkshop(); 
+            break;
+        } else {
+            cout << "Станция с ID " << id << " не найдена\n";
+        }
     }
 }
 
-void PipelineNetwork::deleteStation(int id) {
-    if (stations.count(id)) {
-        stations.erase(id);
-        cout << "Станция удалена\n";
-    } else {
-        cout << "Станция с ID " << id << " не найдена\n";
+void PipelineNetwork::deleteStation() {
+    int id;
+
+    while (1) {
+        cout << "Введите ID КС для удаления: ";
+        cin >> id;
+        if (stations.count(id)) {
+            stations.erase(id);
+            cout << "Станция удалена\n";
+            break;
+        } else {
+            cout << "Станция с ID " << id << " не найдена\n";
+        }
     }
 }
 
 vector<int> PipelineNetwork::findPipesByName(const string& name) {
+
     vector<int> result;
     for (const auto& [id, pipe] : pipes) {
         if (pipe.getName().find(name) != string::npos) {

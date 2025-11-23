@@ -27,7 +27,7 @@ public:
     void setName();
     void setNumberWorkshop();
     void setWorkingWorkshop();
-    void setWorkingWorkshop(int& change);
+    void setWorkingEditWorkshop();
     void setClassWorkshop();
 
     void loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop);

@@ -68,30 +68,22 @@ int main() {
                 break;
                 
             case 4: {
-                cout << "Введите ID трубы для редактирования: ";
-                int id = GetCorrectNumberLog(1, 1000);
-                network.editPipe(id);
+                network.editPipe();
                 break;
             }
                 
             case 5: {
-                cout << "Введите ID КС для редактирования: ";
-                int id = GetCorrectNumberLog(1, 1000);
-                network.editStation(id);
+                network.editStation();
                 break;
             }
                 
             case 6: {
-                cout << "Введите ID трубы для удаления: ";
-                int id = GetCorrectNumberLog(1, 1000);
-                network.deletePipe(id);
+                network.deletePipe();
                 break;
             }
                 
             case 7: {
-                cout << "Введите ID КС для удаления: ";
-                int id = GetCorrectNumberLog(1, 1000);
-                network.deleteStation(id);
+                network.deleteStation();
                 break;
             }
                 
