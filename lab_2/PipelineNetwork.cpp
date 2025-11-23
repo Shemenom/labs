@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "Utils.h"
 
+
 using namespace std;
 
 PipelineNetwork::PipelineNetwork() : nextPipeId(1), nextStationId(1) {}
@@ -32,24 +33,24 @@ void PipelineNetwork::inputPipeData(Pipe& pipe) {
     pipe.setName();
 
     cout << "Длина: ";
-    double length = GetCorrectNumberLog(0.1, 10000.0);
-    pipe.setLength(length);
+   // double length = GetCorrectNumberLog(0.1, 10000.0);
+    pipe.setLength();
 
     cout << "Диаметр: ";
-    int diameter = GetCorrectNumberLog(1, 5000);
-    pipe.setDiameter(diameter);
+    //int diameter = GetCorrectNumberLog(1, 5000);
+    pipe.setDiameter();
 
     cout << "Состояние (0 - в ремонте, 1 - работает): ";
-    bool inRepair = GetCorrectNumberLog(0, 1);
-    pipe.setInRepair(inRepair);
+    // bool inRepair = GetCorrectNumberLog(0, 1);
+    pipe.setInRepair();
 }
 
 void PipelineNetwork::editPipe(int id) {
     if (pipes.count(id)) {
         cout << "Текущий статус ремонта: " << (pipes[id].isInRepair() ? "в ремонте" : "работает") << endl;
         cout << "Новый статус (0 - в ремонте, 1 - работает): ";
-        bool newStatus = GetCorrectNumberLog(0, 1);
-        pipes[id].setInRepair(newStatus);
+        //bool newStatus = GetCorrectNumberLog(0, 1);
+        pipes[id].setInRepair();
         cout << "Статус трубы обновлен\n";
     } else {
         cout << "Труба с ID " << id << " не найдена\n";
@@ -87,25 +88,20 @@ void PipelineNetwork::inputStationData(CompressorStation& station) {
     station.setName();
 
     cout << "Количество цехов: ";
-    int numberWorkshop = GetCorrectNumberLog(1, 1000);
-    station.setNumberWorkshop(numberWorkshop);
+    station.setNumberWorkshop();
 
     cout << "Количество работающих цехов: ";
-    int workingWorkshop = GetCorrectNumberLog(0, numberWorkshop);
-    station.setWorkingWorkshop(workingWorkshop);
+    station.setWorkingWorkshop();
 
     cout << "Класс станции (1-5): ";
-    int classWorkshop = GetCorrectNumberLog(1, 5);
-    station.setClassWorkshop(classWorkshop);
+    station.setClassWorkshop();
 }
 
 void PipelineNetwork::editStation(int id) {
     if (stations.count(id)) {
         cout << "Запуск цеха (+1), остановка цеха (-1): ";
         int change = GetCorrectNumberLog(-1, 1);
-        
         stations[id].setWorkingWorkshop(change); 
-        cout << "Количество работающих цехов: " << stations[id].getWorkingWorkshop() << endl;
     } else {
         cout << "Станция с ID " << id << " не найдена\n";
     }
@@ -191,7 +187,7 @@ void PipelineNetwork::batchEditPipes(const vector<int>& pipeIds) {
     cin >> newStatus;
     
     for (int id : pipesToEdit) {
-        pipes[id].setInRepair(newStatus);
+        pipes[id].setInRepair();
     }
     
     cout << "Отредактировано труб: " << pipesToEdit.size() << endl;

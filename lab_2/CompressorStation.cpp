@@ -14,25 +14,20 @@ double CompressorStation::getUnusedPercentage() const {
 }
 
 void CompressorStation::setName() {
-    INPUT_LINE_LOG(cin, name);
+    getline(cin >> ws, name);
 }
 
-void CompressorStation::setNumberWorkshop(int& number) {
-    while (number <= 0) {
-        cout << "Количество цехов должно быть положительным: ";
-        cin >> number;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            number = 0;
-        }
+void CompressorStation::setNumberWorkshop() {
+    while (!(cin >> numberWorkshop) || (numberWorkshop < 0)) {
+        cout << "Введите данные коренктно: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    numberWorkshop = number;
 }
 
 void CompressorStation::setWorkingWorkshop() {
     // Используем numberWorkshop напрямую
-    while (!(cin >> workingWorkshop) && (workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
+    while (!(cin >> workingWorkshop) || (workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
         cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -42,24 +37,19 @@ void CompressorStation::setWorkingWorkshop() {
 void CompressorStation::setWorkingWorkshop(int& change) {
     // Используем numberWorkshop напрямую
     workingWorkshop += change;
-    while (!(cin >> workingWorkshop) && (workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
+    while ((workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
         cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
-void CompressorStation::setClassWorkshop(int classW) {
-    while (classW < 1 || classW > 5) {
-        cout << "Ошибка: класс станции должен быть от 1 до 5. Введите снова: ";
-        cin >> classW;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            classW = 0;
-        }
+void CompressorStation::setClassWorkshop() {
+   while (!(cin >> classWorkshop) || (classWorkshop > 5) || (classWorkshop < 1)) {
+        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    classWorkshop = classW;
 }
 
 void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop) {

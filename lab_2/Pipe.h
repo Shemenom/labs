@@ -24,9 +24,9 @@ public:
     bool isInRepair() const { return inRepair; }
     
     void setName();
-    void setLength(double newLength);
-    void setDiameter(int newDiameter);
-    void setInRepair(bool repair);
+    void setLength();
+    void setDiameter();
+    void setInRepair();
 
     void loadData(const string& loadName, double loadLength, int loadDiameter, bool loadInRepair);
 };

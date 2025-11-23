@@ -6,6 +6,15 @@
         "istream": "cpp",
         "limits": "cpp",
         "ios": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "__config": "cpp",
+        "bitset": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "locale": "cpp",
+        "ostream": "cpp",
+        "string_view": "cpp",
+        "tuple": "cpp",
+        "new": "cpp"
     }
 }

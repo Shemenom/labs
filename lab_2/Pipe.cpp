@@ -9,37 +9,31 @@ using namespace std;
 Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
 
 void Pipe::setName() {
-    INPUT_LINE_LOG(cin, name);
+    getline(cin >> ws, name);
 }
 
-void Pipe::setLength(double newLength) {
-    while (newLength <= 0) {
-        cout << "Ошибка: длина должна быть положительной. Введите снова: ";
-        cin >> newLength;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            newLength = 0;
-        }
+void Pipe::setLength() {
+    while(!(cin >> length) || (length <= 0)) {
+        cout << "Введите денные коректно: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
     }
-    length = newLength;
 }
 
-void Pipe::setDiameter(int newDiameter) {
-    while (newDiameter <= 0) {
-        cout << "Ошибка: диаметр должен быть положительным. Введите снова: ";
-        cin >> newDiameter;
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            newDiameter = 0;
-        }
+void Pipe::setDiameter() {
+    while (!(cin >> diameter) || (diameter <= 0)) {
+        cout << "Введите денные коректно: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    } 
+}
+
+void Pipe::setInRepair() { 
+    while(!(cin >> inRepair)) {
+        cout <<"Введите денные коректно: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
     }
-    diameter = newDiameter;
-}
-
-void Pipe::setInRepair(bool repair) { 
-    inRepair = repair; 
 }
 
 void Pipe::loadData(const string& loadName, double loadLength, int loadDiameter, bool loadInRepair) {
