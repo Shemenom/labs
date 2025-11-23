@@ -49,18 +49,6 @@ void CompressorStation::setWorkingWorkshop(int& change) {
     }
 }
 
-void CompressorStation::setWorkingEditWorkshop(int& change) {
-    int newWorking = workingWorkshop + change;
-    
-    while (newWorking < 0 || newWorking > numberWorkshop) {
-        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop 
-             << ". Текущее: " << workingWorkshop << ". Введите изменение: ";
-        cin >> change;
-        newWorking = workingWorkshop + change;
-    }
-    workingWorkshop = newWorking;
-}
-
 void CompressorStation::setClassWorkshop(int classW) {
     while (classW < 1 || classW > 5) {
         cout << "Ошибка: класс станции должен быть от 1 до 5. Введите снова: ";
