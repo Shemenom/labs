@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <unordered_map>
 #include "PipelineNetwork.h"
 #include "Utils.h"
 #include "LogUtils.h"
@@ -22,15 +23,13 @@ void displayMenu() {
     cout << "10. Пакетное редактирование труб\n";
     cout << "11. Сохранить данные\n";
     cout << "12. Загрузить данные\n";
-    cout << "13: Загрузить данные с лог файла\n";
     cout << "0. Выход\n";
     cout << "Выберите действие: ";
 }
 
 int main() {
-    PipelineNetwork network;
-    Pipe pipe;
-    CompressorStation CS;
+    unordered_map<int, Pipe> Pipes;
+    unordered_map<int, CompressorStation> Stations; 
     int choice;
     
     do {
@@ -47,19 +46,11 @@ int main() {
         switch (choice) {
             case 1:
             {
-                network.addPipe();
-                logger.log(pipe.getName());
-                logger.log(to_string(pipe.getLength()));
-                logger.log(to_string(pipe.getDiameter()));
-                logger.log(to_string(pipe.isInRepair()));
+                addPipe();
                 break;
             }
             case 2:
                 network.addStation();
-                logger.log(CS.getName());
-                logger.log(to_string(CS.getNumberWorkshop()));
-                logger.log(to_string(CS.getNumberWorkshop()));
-                logger.log(to_string(CS.getClassWorkshop()));
                 break;
                 
             case 3:
@@ -187,12 +178,6 @@ int main() {
                 }
                 break;
             }
-
-            case 13: {
-                network.loadDataFromLog();
-                break;
-            }
-                
             case 0:
                 cout << "Выход из программы\n";
                 logger.log("Пользователь завершил программу");

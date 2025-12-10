@@ -6,13 +6,21 @@
 
 using namespace std;
 
-Pipe::Pipe(int newId) : id(newId), length(0), diameter(0), inRepair(false) {}
+int Pipe::nextId = 1;
 
-void Pipe::setName() {
-    getline(cin >> ws, name);
+Pipe::Pipe() {
+    id++;
+    length = 0;
+    diameter = 0;
+    inRepair = false;
 }
 
-void Pipe::setLength() {
+void Pipe::InputPipe() {
+    // Ввод названия
+    cout << "Название трубы: ";
+    getline(cin >> ws, name);
+
+    // Ввод длины
     cout << "Введите длину трубы (0.1-1000 км): ";
     double minLength = 0.1;
     double maxLength = 1000.0;
@@ -21,14 +29,12 @@ void Pipe::setLength() {
         if (length > 0) break;
         cout << "Длина должна быть положительной: ";
     }
-}
 
-void Pipe::setDiameter() {
+    // Ввод диаметра
     cout << "Введите диаметр трубы (10-2000 мм): ";
     diameter = GetCorrectNumber(10, 2000);
-}
 
-void Pipe::setInRepair() { 
+    // Ввод состояния
     cout << "Введите состояние (0 - в ремонте, 1 - работает): ";
     inRepair = GetCorrectNumber(0, 1);
 }
