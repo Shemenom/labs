@@ -18,40 +18,34 @@ void CompressorStation::setName() {
 }
 
 void CompressorStation::setNumberWorkshop() {
-    while (!(cin >> numberWorkshop) || (numberWorkshop < 0)) {
-        cout << "Введите данные коренктно: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    cout << "Введите количество цехов (1-100): ";
+    numberWorkshop = GetCorrectNumber(1, 100);
 }
 
 void CompressorStation::setWorkingWorkshop() {
-    // Используем numberWorkshop напрямую
-    while (!(cin >> workingWorkshop) || (workingWorkshop < 0) || (workingWorkshop > numberWorkshop)) {
-        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    cout << "Введите количество работающих цехов (0-" << numberWorkshop << "): ";
+    workingWorkshop = GetCorrectNumber(0, numberWorkshop);
 }
 
 void CompressorStation::setWorkingEditWorkshop() {
-    // Используем numberWorkshop напрямую
     cout << "Запуск цеха (+1), остановка цеха (-1): ";
     int change;
-    while (!(cin >> change) || ((workingWorkshop + change) < 0) || ((workingWorkshop + change) > numberWorkshop)) {
-        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    change = GetCorrectNumber(-1, 1);
+    
+    int newWorking = workingWorkshop + change;
+    if (newWorking < 0) {
+        cout << "Ошибка: количество работающих цехов не может быть меньше 0\n";
+    } else if (newWorking > numberWorkshop) {
+        cout << "Ошибка: количество работающих цехов не может превышать общее количество цехов\n";
+    } else {
+        workingWorkshop = newWorking;
+        cout << "Новое количество работающих цехов: " << workingWorkshop << endl;
     }
-    workingWorkshop += change;
 }
 
 void CompressorStation::setClassWorkshop() {
-   while (!(cin >> classWorkshop) || (classWorkshop > 5) || (classWorkshop < 1)) {
-        cout << "Количество работающих цехов должно быть от 0 до " << numberWorkshop << ": ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    cout << "Введите класс станции (1-5): ";
+    classWorkshop = GetCorrectNumber(1, 5);
 }
 
 void CompressorStation::loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop) {

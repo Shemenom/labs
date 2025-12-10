@@ -13,27 +13,24 @@ void Pipe::setName() {
 }
 
 void Pipe::setLength() {
-    while(!(cin >> length) || (length <= 0)) {
-        cout << "Введите денные коректно: ";
-        cin.clear();
-        cin.ignore(1000, '\n');
+    cout << "Введите длину трубы (0.1-1000 км): ";
+    double minLength = 0.1;
+    double maxLength = 1000.0;
+    while (true) {
+        length = GetCorrectNumber(minLength, maxLength);
+        if (length > 0) break;
+        cout << "Длина должна быть положительной: ";
     }
 }
 
 void Pipe::setDiameter() {
-    while (!(cin >> diameter) || (diameter <= 0)) {
-        cout << "Введите денные коректно: ";
-        cin.clear();
-        cin.ignore(1000, '\n');
-    } 
+    cout << "Введите диаметр трубы (10-2000 мм): ";
+    diameter = GetCorrectNumber(10, 2000);
 }
 
 void Pipe::setInRepair() { 
-    while(!(cin >> inRepair)) {
-        cout <<"Введите денные коректно: ";
-        cin.clear();
-        cin.ignore(1000, '\n');
-    }
+    cout << "Введите состояние (0 - в ремонте, 1 - работает): ";
+    inRepair = GetCorrectNumber(0, 1);
 }
 
 void Pipe::loadData(const string& loadName, double loadLength, int loadDiameter, bool loadInRepair) {
