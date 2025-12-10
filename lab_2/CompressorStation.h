@@ -12,6 +12,7 @@ private:
     int numberWorkshop;
     int workingWorkshop;
     int classWorkshop;
+    static int nextId;
     
 public:
     CompressorStation() {};
@@ -32,3 +33,5 @@ public:
 
     void loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop);
 };
+
+void inputCS();

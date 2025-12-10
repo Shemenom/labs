@@ -15,12 +15,10 @@ private:
     unordered_map<int, CompressorStation> stations;
     int nextPipeId;
     int nextStationId;
- 
+
     int findFreeStationId();
 public:
     PipelineNetwork();
-    
-    void addPipe(unordered_map<int, Pipe> pipes);
 
     // void inputPipeData(Pipe& pipe);
     void editPipe();
@@ -45,3 +43,5 @@ public:
     void loadFromFile_pipe(ifstream& file);
     void loadFromFile_CS(ifstream& file);
 };
+
+void addPipe(unordered_map<int, Pipe> pipes);

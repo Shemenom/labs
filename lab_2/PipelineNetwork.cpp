@@ -10,36 +10,28 @@ using namespace std;
 
 PipelineNetwork::PipelineNetwork() : nextPipeId(1), nextStationId(1) {}
 
-int PipelineNetwork::findFreePipeId() {
-    int id = 1;
-    while (pipes.count(id) > 0) {
-        id++;
-    }
-    return id;
-}
 
-void PipelineNetwork::addPipe() {
-    int freeId = findFreePipeId();
-    Pipe pipe(freeId);
-    inputPipeData(pipe);
+void PipelineNetwork::addPipe(unordered_map<int, Pipe> pipes) {
+    Pipe pipe;
+    //inputPipeData(pipe);
+    pipe.InputPipe();
     pipes[pipe.getId()] = pipe;
-    
     cout << "Труба добавлена (ID: " << pipe.getId() << ")\n";
 }
 
-void PipelineNetwork::inputPipeData(Pipe& pipe) {    
-    cout << "Название трубы: ";
-    pipe.setName();
+// void PipelineNetwork::inputPipeData(Pipe& pipe) {    
+//     cout << "Название трубы: ";
+//     pipe.setName();
 
-    cout << "Длина: ";
-    pipe.setLength();
+//     cout << "Длина: ";
+//     pipe.setLength();
 
-    cout << "Диаметр: ";
-    pipe.setDiameter();
+//     cout << "Диаметр: ";
+//     pipe.setDiameter();
 
-    cout << "Состояние (0 - в ремонте, 1 - работает): ";
-    pipe.setInRepair();
-}
+//     cout << "Состояние (0 - в ремонте, 1 - работает): ";
+//     pipe.setInRepair();
+// }
 
 void PipelineNetwork::editPipe() {
     int id;
@@ -77,13 +69,11 @@ int PipelineNetwork::findFreeStationId() {
     return id;
 }
 
-void PipelineNetwork::addStation() {
-    int freeId = findFreeStationId();
-    CompressorStation station(freeId);
-    inputStationData(station);
-    stations[station.getId()] = station;
-    
-    cout << "Компрессорная станция добавлена (ID: " << station.getId() << ")\n";
+void PipelineNetwork::addStation(unorderes_map<int, CompressorStation> stations) {
+    CompressorStation CS;
+    CS.inputCS();
+    stations[CS.getId] = CS;
+    cout << "Компрессорная станция добавлена (ID: " << stations.getId() << ")\n";
 }
 
 void PipelineNetwork::inputStationData(CompressorStation& station) {

@@ -9,7 +9,7 @@ using namespace std;
 int Pipe::nextId = 1;
 
 Pipe::Pipe() {
-    id++;
+    id = nextId++;
     length = 0;
     diameter = 0;
     inRepair = false;
@@ -21,21 +21,19 @@ void Pipe::InputPipe() {
     getline(cin >> ws, name);
 
     // Ввод длины
-    cout << "Введите длину трубы (0.1-1000 км): ";
-    double minLength = 0.1;
-    double maxLength = 1000.0;
+    cout << "Введите длину трубы: ";
     while (true) {
-        length = GetCorrectNumber(minLength, maxLength);
+        length = GetCorrectNumber(0, 1000);
         if (length > 0) break;
         cout << "Длина должна быть положительной: ";
     }
 
     // Ввод диаметра
-    cout << "Введите диаметр трубы (10-2000 мм): ";
+    cout << "Введите диаметр трубы: ";
     diameter = GetCorrectNumber(10, 2000);
 
     // Ввод состояния
-    cout << "Введите состояние (0 - в ремонте, 1 - работает): ";
+    cout << "Введите состояние: ";
     inRepair = GetCorrectNumber(0, 1);
 }
 
