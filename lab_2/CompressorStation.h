@@ -25,13 +25,7 @@ public:
     int getWorkingWorkshop() const { return workingWorkshop; }
     int getClassWorkshop() const { return classWorkshop; }
     
-    void setName();
-    void setNumberWorkshop();
-    void setWorkingWorkshop();
-    void setWorkingEditWorkshop();
-    void setClassWorkshop();
+    void inputCS();
 
     void loadData(const string& loadName, int loadNumberWorkshop, int loadWorkingWorkshop, int loadClassWorkshop);
 };
-
-void inputCS();

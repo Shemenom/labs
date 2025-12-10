@@ -23,8 +23,7 @@ public:
     // void inputPipeData(Pipe& pipe);
     void editPipe();
     void deletePipe();
-    
-    void addStation();
+
     void inputStationData(CompressorStation& station);
     void editStation();
     void deleteStation();
@@ -45,3 +44,4 @@ public:
 };
 
 void addPipe(unordered_map<int, Pipe> pipes);
+void addStation(unordered_map<int, CompressorStation> stations);

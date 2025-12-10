@@ -46,7 +46,7 @@ int main() {
         switch (choice) {
             case 1:
             {
-                addPipe();
+                addPipe(Pipes);
                 break;
             }
             case 2:
